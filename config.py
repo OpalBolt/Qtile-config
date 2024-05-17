@@ -14,12 +14,9 @@
 # --------------------
 
 import os
-import initkeys
-import initcolors
-import initlayout
-import initkeymap
-import initwidgets
-import initscreens
+from modules.initcolors import load_colors
+from modules.initkeys import keys
+from modules.initscreens import screens
 from libqtile import bar, widget
 from libqtile.config import Click, Drag, Screen
 from libqtile.lazy import lazy
@@ -44,21 +41,17 @@ keyboard_Lang = "dk"
 theme = "kanagawa"
 font = "IosevkaTerm NFM"
 
-# Load keymap from initkeys.py
-keys = initkeys.define_all_keys(mod, terminal)
-
 # Load colors from initcolors.py
 # Currently only the following colors schemes has been created
 # for this configuration
 # kanagawa
-colors = initcolors.load_colors(theme)
+colors = load_colors(theme)
 layouts = initlayout.load_layout(colors)
 floating_layout = initlayout.load_floating_layout(colors)
 wl_input_rules = initkeymap.load_keymap(keyboard_Lang)
 
 widget_defaults = initwidgets.load_widget_defaults(font)
 extension_defaults = widget_defaults.copy()
-screens = initscreens.load_screens(colors)
 
 # Drag floating layouts.
 mouse = [
