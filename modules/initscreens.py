@@ -9,17 +9,47 @@
 #       MMb
 #        `bood'
 
-import initbars
+from sys import path
 from libqtile.config import Screen
-from libqtile import bar, widget
+from libqtile import bar
+
+path.append("..")
+from modules.initcolors import colors
+from modules.initwidgets import load_widgets
 
 
-def load_screens(colors):
-    screens = [
-        Screen(
-            wallpaper="/home/mads/HQ Ghibli Wallpapers/Spirited Away/04.png",
-            wallpaper_mode="fill",
-            top=initbars.load_bars(colors),
+screens = [
+    Screen(
+        top=bar.Bar(
+            widgets=load_widgets(),
+            size=30,  # "Thickness of the bar"
+            border_width=[0, 0, 0, 0],
+            border_color=[colors["darkBackground"]],
+            margin=[15, 60, 6, 60],
         ),
-    ]
-    return screens
+        wallpaper="/home/mads/HQ Ghibli Wallpapers/Spirited Away/04.png",
+        wallpaper_mode="fill",
+    ),
+    Screen(
+        top=bar.Bar(
+            widgets=load_widgets(),
+            size=30,  # "Thickness of the bar"
+            border_width=[0, 0, 0, 0],
+            border_color=[colors["darkBackground"]],
+            margin=[15, 60, 6, 60],
+        ),
+        wallpaper="/home/mads/HQ Ghibli Wallpapers/Spirited Away/04.png",
+        wallpaper_mode="fill",
+    ),
+    Screen(
+        top=bar.Bar(
+            widgets=load_widgets(),
+            size=30,  # "Thickness of the bar"
+            border_width=[0, 0, 0, 0],
+            border_color=[colors["darkBackground"]],
+            margin=[15, 60, 6, 60],
+        ),
+        wallpaper="/home/mads/HQ Ghibli Wallpapers/Spirited Away/04.png",
+        wallpaper_mode="fill",
+    ),
+]
