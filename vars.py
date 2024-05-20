@@ -14,6 +14,7 @@
 
 
 mod = "mod4"
+mod1 = "mod1"
 terminal = "kitty"
 keyboard_Lang = "dk"
 theme = "kanagawa"
