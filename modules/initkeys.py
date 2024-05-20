@@ -11,12 +11,14 @@
 
 from sys import path
 from libqtile.lazy import lazy
-from libqtile.config import Key, Group
+from libqtile.config import Key
 from libqtile import qtile
 from libqtile.backend.wayland.inputs import InputConfig
 
 path.append("..")
-from vars import mod, terminal, keyboard_Lang
+from vars import mod, mod1, terminal, keyboard_Lang
+
+from modules.initgroups import groups
 
 
 keys = [
@@ -24,10 +26,14 @@ keys = [
     # Focus
     # ------
     # Keys used to switch focus between windows
-    Key([mod], "h", lazy.layout.left(), desc="Move focus to left"),
-    Key([mod], "l", lazy.layout.right(), desc="Move focus to right"),
-    Key([mod], "j", lazy.layout.down(), desc="Move focus down"),
-    Key([mod], "k", lazy.layout.up(), desc="Move focus up"),
+    Key([mod], "Up", lazy.layout.up(), desc="Change focus to window above."),
+    Key([mod], "Down", lazy.layout.down(), desc="Change focus to window below."),
+    Key([mod], "Left", lazy.layout.left(), desc="Change focus to window on the left."),
+    Key([mod], "Right", lazy.layout.right(), desc="Change focus to window the right."),
+    Key([mod], "k", lazy.layout.up(), desc="Change focus to window above."),
+    Key([mod], "j", lazy.layout.down(), desc="Change focus to window below."),
+    Key([mod], "h", lazy.layout.left(), desc="Change focus to window on the left."),
+    Key([mod], "l", lazy.layout.right(), desc="Change focus to window on the right."),
     Key([mod], "space", lazy.layout.next(), desc="Move window focus to other window"),
     # ------
     # Move
@@ -44,8 +50,18 @@ keys = [
         lazy.layout.shuffle_right(),
         desc="Move window to the right",
     ),
-    Key([mod, "shift"], "j", lazy.layout.shuffle_down(), desc="Move window down"),
-    Key([mod, "shift"], "k", lazy.layout.shuffle_up(), desc="Move window up"),
+    Key([mod, "shift"], "Up", lazy.layout.shuffle_up(), desc="Shuffle window up."),
+    Key(
+        [mod, "shift"], "Down", lazy.layout.shuffle_down(), desc="Shuffle window down."
+    ),
+    Key([mod, "shift"], "Left", lazy.layout.swap_left(), desc="Shuffle window left."),
+    Key(
+        [mod, "shift"], "Right", lazy.layout.swap_right(), desc="Shuffle window right."
+    ),
+    Key([mod, "shift"], "k", lazy.layout.shuffle_up(), desc="Shuffle window up."),
+    Key([mod, "shift"], "j", lazy.layout.shuffle_down(), desc="Shuffle window down."),
+    Key([mod, "shift"], "h", lazy.layout.swap_left(), desc="Shuffle window left."),
+    Key([mod, "shift"], "l", lazy.layout.swap_right(), desc="Shuffle window right."),
     #
     # ------
     # Size
@@ -54,19 +70,91 @@ keys = [
     # will be to screen edge - window would shrink.
     Key(
         [mod, "control"],
-        "h",
-        lazy.layout.grow_left(),
-        desc="Grow window to the left",
+        "l",
+        lazy.layout.grow_right(),
+        lazy.layout.grow(),
+        lazy.layout.increase_ratio(),
+        lazy.layout.delete(),
+        desc="Increase active window size.",
     ),
     Key(
         [mod, "control"],
-        "l",
+        "Right",
         lazy.layout.grow_right(),
-        desc="Grow window to the right",
+        lazy.layout.grow(),
+        lazy.layout.increase_ratio(),
+        lazy.layout.delete(),
+        desc="Increase active window size.",
     ),
-    Key([mod, "control"], "j", lazy.layout.grow_down(), desc="Grow window down"),
-    Key([mod, "control"], "k", lazy.layout.grow_up(), desc="Grow window up"),
+    Key(
+        [mod, "control"],
+        "h",
+        lazy.layout.grow_left(),
+        lazy.layout.shrink(),
+        lazy.layout.decrease_ratio(),
+        lazy.layout.add(),
+        desc="Decrease active window size.",
+    ),
+    Key(
+        [mod, "control"],
+        "Left",
+        lazy.layout.grow_left(),
+        lazy.layout.shrink(),
+        lazy.layout.decrease_ratio(),
+        lazy.layout.add(),
+        desc="Decrease active window size.",
+    ),
+    Key(
+        [mod, "control"],
+        "k",
+        lazy.layout.grow_up(),
+        lazy.layout.grow(),
+        lazy.layout.decrease_nmaster(),
+        desc="Increase active window size.",
+    ),
+    Key(
+        [mod, "control"],
+        "Up",
+        lazy.layout.grow_up(),
+        lazy.layout.grow(),
+        lazy.layout.decrease_nmaster(),
+        desc="Increase active window size.",
+    ),
+    Key(
+        [mod, "control"],
+        "j",
+        lazy.layout.grow_down(),
+        lazy.layout.shrink(),
+        lazy.layout.increase_nmaster(),
+        desc="Decrease active window size.",
+    ),
+    Key(
+        [mod, "control"],
+        "Down",
+        lazy.layout.grow_down(),
+        lazy.layout.shrink(),
+        lazy.layout.increase_nmaster(),
+        desc="Decrease active window size.",
+    ),
     Key([mod], "n", lazy.layout.normalize(), desc="Reset all window sizes"),
+    Key(
+        [mod], "r", lazy.layout.reset(), desc="Reset the sizes of all window in group."
+    ),
+    # ------
+    # Monitor change
+    # ------
+    Key([mod], "i", lazy.to_screen(0), desc="Keyboard focus to monitor 1"),
+    Key([mod], "o", lazy.to_screen(1), desc="Keyboard focus to monitor 2"),
+    Key([mod], "p", lazy.to_screen(2), desc="Keyboard focus to monitor 3"),
+    Key([mod], "period", lazy.next_screen(), desc="Move focus to next monitor"),
+    Key([mod], "comma", lazy.prev_screen(), desc="Move focus to prev monitor"),
+    Key([mod1], "Tab", lazy.screen.next_group(), desc="Move to next group."),
+    Key(
+        [mod1, "shift"],
+        "Tab",
+        lazy.screen.prev_group(),
+        desc="Move to previous group.",
+    ),
     # ------
     # Layout mgmt
     # ------
@@ -118,8 +206,6 @@ for vt in range(1, 8):
         )
     )
 
-groups = [Group(i) for i in "123456789"]
-
 for i in groups:
     keys.extend(
         [
@@ -144,6 +230,12 @@ for i in groups:
             #     desc="move focused window to group {}".format(i.name)),
         ]
     )
+
+keys.extend(
+    [
+        Key([mod, "mod1"], "Return", lazy.group["scratchpad"].dropdown_toggle("term")),
+    ]
+)
 
 
 wl_input_rules = {
