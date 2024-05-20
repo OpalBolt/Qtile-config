@@ -9,11 +9,74 @@
 #       MMb                                                                      6'     dP
 #        `bood'                                                                  Ybmmmd'
 
+from sys import path
+from qtile_extras.widget.decorations import RectDecoration
+from libqtile import widget
 
-def load_widget_defaults(font: str):
-    widget_defaults = dict(
-        font=font,
-        fontsize=12,
-        padding=3,
-    )
-    return widget_defaults
+path.append("..")
+from vars import font
+from modules.initcolors import colors
+
+
+widget_defaults = dict(
+    font=font,
+    fontsize=12,
+    padding=3,
+)
+
+dark_widgets = {
+    "decorations": [
+        RectDecoration(
+            colour=colors["highlight"],
+            filled=True,
+            radius=10,
+            padding_y=4,
+            group=True,
+        )
+    ]
+}
+
+light_widgets = {
+    "decorations": [
+        RectDecoration(
+            colour=colors["widgetLight"],
+            filled=True,
+            radius=10,
+            padding_y=4,
+            group=True,
+        )
+    ]
+}
+
+mid_widgets = {
+    "decorations": [
+        RectDecoration(
+            colour=colors["highlight"], filled=True, radius=10, padding_y=4, group=True
+        )
+    ]
+}
+
+
+def load_widgets():
+    widgets_list = [
+        widget.CurrentLayout(**widget_defaults),
+        widget.GroupBox(),
+        widget.WindowName(),
+        widget.KeyboardLayout(
+            fmt="⌨  Kbd: {}",
+        ),
+        widget.Chord(
+            chords_colors={
+                "launch": ("#ff0000", "#ffffff"),
+            },
+            name_transform=lambda name: name.upper(),
+        ),
+        widget.TextBox("default config", name="default"),
+        widget.TextBox("Press &lt;M-r&gt; to spawn", foreground="#d75f5f"),
+        # NB Systray is incompatible with Wayland, consider using StatusNotifier instead
+        # widget.StatusNotifier(),
+        widget.Clock(format="%Y-%m-%d %a %I:%M %p"),
+        widget.QuickExit(),
+    ]
+
+    return widgets_list
