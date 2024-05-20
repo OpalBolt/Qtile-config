@@ -14,14 +14,17 @@
 # --------------------
 
 import os
-from vars import *
+
+from vars import mod
 from modules.initkeys import keys, wl_input_rules
 from modules.initscreens import screens
 from modules.initlayout import layouts, floating_layout
+from modules.initgroups import groups
 from libqtile import bar, widget
 from libqtile.config import Click, Drag, Screen
 from libqtile.lazy import lazy
 from pathlib import Path
+from libqtile import qtile
 
 # from libqtile.backend.wayland import InputConfig
 
@@ -29,15 +32,22 @@ from pathlib import Path
 # Auto fetching variables
 # --------------------
 home = str(Path.home())  # Fetches the home location
-platform = int(
-    os.popen("cat /sys/class/dmi/id/chassis_type").read()
-)  # Finds the type of system that is running
+platform = int(os.popen("cat /sys/class/dmi/id/chassis_type").read())
+
+if qtile.core.name == "wayland":
+    os.environ["XDG_SESSION_DESKTOP"] = "qtile:wlroots"
+    os.environ["XDG_CURRENT_DESKTOP"] = "qtile:wlroots"
+# Finds the type of system that is running
+
 
 # Load colors from initcolors.py
 # Currently only the following colors schemes has been created
 # for this configuration
 # kanagawa
 
+if qtile.core.name == "wayland":
+    os.environ["XDG_SESSION_DESKTOP"] = "qtile:wlroots"
+    os.environ["XDG_CURRENT_DESKTOP"] = "qtile:wlroots"
 
 # Drag floating layouts.
 mouse = [
