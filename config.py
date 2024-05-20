@@ -14,9 +14,10 @@
 # --------------------
 
 import os
-from modules.initcolors import load_colors
-from modules.initkeys import keys
+from vars import *
+from modules.initkeys import keys, wl_input_rules
 from modules.initscreens import screens
+from modules.initlayout import layouts, floating_layout
 from libqtile import bar, widget
 from libqtile.config import Click, Drag, Screen
 from libqtile.lazy import lazy
@@ -32,26 +33,11 @@ platform = int(
     os.popen("cat /sys/class/dmi/id/chassis_type").read()
 )  # Finds the type of system that is running
 
-# --------------------
-# Manual set vriables
-# --------------------
-mod = "mod4"
-terminal = "kitty"
-keyboard_Lang = "dk"
-theme = "kanagawa"
-font = "IosevkaTerm NFM"
-
 # Load colors from initcolors.py
 # Currently only the following colors schemes has been created
 # for this configuration
 # kanagawa
-colors = load_colors(theme)
-layouts = initlayout.load_layout(colors)
-floating_layout = initlayout.load_floating_layout(colors)
-wl_input_rules = initkeymap.load_keymap(keyboard_Lang)
 
-widget_defaults = initwidgets.load_widget_defaults(font)
-extension_defaults = widget_defaults.copy()
 
 # Drag floating layouts.
 mouse = [
