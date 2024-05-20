@@ -9,8 +9,12 @@
 #       MMb
 #        `bood'
 
+from sys import path
 import tomllib
 import os
+
+path.append("..")
+from vars import theme
 
 
 # Ensure that all color schemes are loaded from file
@@ -22,12 +26,12 @@ def load_file():
 
 
 # Returns relevant colors based on the
-def load_colors(colorscheme):
-    inputcolors = load_file()
-    colors = {}
-    match colorscheme:
-        case "kanagawa":
-            colors["highlight"] = inputcolors["kanagawa"]["carpYellow"]
-            colors["darkerForground"] = inputcolors["kanagawa"]["sumiInk4"]
-            colors["darkBackground"] = inputcolors["kanagawa"]["sumiInk0"]
-    return colors
+inputcolors = load_file()
+colors = {}
+match theme:
+    case "kanagawa":
+        colors["highlight"] = inputcolors["kanagawa"]["carpYellow"]
+        colors["darkerForground"] = inputcolors["kanagawa"]["sumiInk4"]
+        colors["darkBackground"] = inputcolors["kanagawa"]["sumiInk0"]
+        colors["widgetDefault"] = inputcolors["kanagawa"]["waveBlue1"]
+        colors["widgetLight"] = inputcolors["kanagawa"]["waveBlue2"]

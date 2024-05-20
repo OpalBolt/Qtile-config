@@ -13,53 +13,48 @@
 from libqtile import layout
 from libqtile.config import Match
 
+# Import scripts
+from modules.initcolors import colors
 
-def load_layout_theme(colors: dict):
-    layout_theme = {
-        "border_width": 2,
-        "margin": 7,
-        "border_focus": colors["highlight"],
-        "border_normal": colors["darkerForground"],
-        "single_border_width": 2,
-    }
-    return layout_theme
-
-
-def load_layout(colors: dict):
-    layout_theme = load_layout_theme(colors)
-    layouts = [
-        layout.Columns(**layout_theme),
-        layout.Max(**layout_theme),
-        layout.Bsp(**layout_theme),
-        layout.MonadTall(**layout_theme),
-        layout.Floating(),
-        # layout.Stack(num_stacks=2),
-        # layout.Matrix(),
-        # layout.MonadWide(),
-        # layout.RatioTile(),
-        # layout.Tile(),
-        # layout.TreeTab(),
-        # layout.VerticalTile(),
-        # layout.Zoomy(),
-    ]
-    return layouts
+layout_theme = {
+    "border_width": 2,
+    "margin": 7,
+    "border_focus": colors["highlight"],
+    "border_normal": colors["darkerForground"],
+    "single_border_width": 2,
+}
 
 
-def load_floating_layout(colors: dict):
-    floating_layout = layout.Floating(
-        border_width=2,
-        single_border_width=2,
-        border_focus=colors["highlight"],
-        border_normal=colors["darkerForground"],
-        float_rules=[
-            # Run the utility of `xprop` to see the wm class and name of an X client.
-            *layout.Floating.default_float_rules,
-            Match(wm_class="confirmreset"),  # gitk
-            Match(wm_class="makebranch"),  # gitk
-            Match(wm_class="maketag"),  # gitk
-            Match(wm_class="ssh-askpass"),  # ssh-askpass
-            Match(title="branchdialog"),  # gitk
-            Match(title="pinentry"),  # GPG key password entry
-        ],
-    )
-    return floating_layout
+layouts = [
+    layout.Columns(**layout_theme),
+    layout.Max(**layout_theme),
+    layout.Bsp(**layout_theme),
+    layout.MonadTall(**layout_theme),
+    layout.Floating(),
+    # layout.Stack(num_stacks=2),
+    # layout.Matrix(),
+    # layout.MonadWide(),
+    # layout.RatioTile(),
+    # layout.Tile(),
+    # layout.TreeTab(),
+    # layout.VerticalTile(),
+    # layout.Zoomy(),
+]
+
+
+floating_layout = layout.Floating(
+    border_width=2,
+    single_border_width=2,
+    border_focus=colors["highlight"],
+    border_normal=colors["darkerForground"],
+    float_rules=[
+        # Run the utility of `xprop` to see the wm class and name of an X client.
+        *layout.Floating.default_float_rules,
+        Match(wm_class="confirmreset"),  # gitk
+        Match(wm_class="makebranch"),  # gitk
+        Match(wm_class="maketag"),  # gitk
+        Match(wm_class="ssh-askpass"),  # ssh-askpass
+        Match(title="branchdialog"),  # gitk
+        Match(title="pinentry"),  # GPG key password entry
+    ],
+)
