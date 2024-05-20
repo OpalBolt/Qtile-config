@@ -22,6 +22,7 @@ def load_file():
     home = os.path.expanduser("~")
     with open(home + "/.config/qtile/colors.toml", mode="rb") as file:
         colorconfig = tomllib.load(file)
+    file.close()
     return colorconfig
 
 
