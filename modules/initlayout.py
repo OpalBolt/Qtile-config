@@ -26,15 +26,18 @@ layout_theme = {
 
 
 layouts = [
-    layout.Columns(**layout_theme),
-    layout.Max(**layout_theme),
-    layout.Bsp(**layout_theme),
     layout.MonadTall(**layout_theme),
-    layout.Floating(),
+    layout.MonadWide(**layout_theme),
+    layout.Columns(**layout_theme),
+    layout.Floating(**layout_theme),
+    layout.RatioTile(**layout_theme),
+    layout.Max(**layout_theme),
+    layout.Spiral(
+        min_pane_ratio=0.70, ratio=0.52, new_client_position="bottom", **layout_theme
+    ),
+    # layout.Bsp(**layout_theme),
     # layout.Stack(num_stacks=2),
     # layout.Matrix(),
-    # layout.MonadWide(),
-    # layout.RatioTile(),
     # layout.Tile(),
     # layout.TreeTab(),
     # layout.VerticalTile(),
@@ -43,8 +46,8 @@ layouts = [
 
 
 floating_layout = layout.Floating(
-    border_width=2,
-    single_border_width=2,
+    border_width=4,
+    # single_border_width=2,
     border_focus=colors["highlight"],
     border_normal=colors["darkerForground"],
     float_rules=[
