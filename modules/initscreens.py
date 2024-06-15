@@ -22,10 +22,10 @@ screens = [
     Screen(
         top=bar.Bar(
             widgets=load_widgets(),
+            background="00000000",
+            margin=0,
+            opacity=0.9,
             size=30,  # "Thickness of the bar"
-            border_width=[0, 0, 0, 0],
-            border_color=[colors["darkBackground"]],
-            margin=[15, 60, 6, 60],
         ),
         wallpaper="/home/mads/HQ Ghibli Wallpapers/Spirited Away/04.png",
         wallpaper_mode="fill",
@@ -33,10 +33,10 @@ screens = [
     Screen(
         top=bar.Bar(
             widgets=load_widgets(),
+            background="#00000000",
+            margin=0,
+            opacity=0.9,
             size=30,  # "Thickness of the bar"
-            border_width=[0, 0, 0, 0],
-            border_color=[colors["darkBackground"]],
-            margin=[15, 60, 6, 60],
         ),
         wallpaper="/home/mads/HQ Ghibli Wallpapers/Spirited Away/04.png",
         wallpaper_mode="fill",
@@ -44,10 +44,10 @@ screens = [
     Screen(
         top=bar.Bar(
             widgets=load_widgets(),
+            background="#00000000",
+            margin=0,
+            opacity=0.9,
             size=30,  # "Thickness of the bar"
-            border_width=[0, 0, 0, 0],
-            border_color=[colors["darkBackground"]],
-            margin=[15, 60, 6, 60],
         ),
         wallpaper="/home/mads/HQ Ghibli Wallpapers/Spirited Away/04.png",
         wallpaper_mode="fill",
