@@ -32,7 +32,17 @@ colors = {}
 match theme:
     case "kanagawa":
         colors["highlight"] = inputcolors["kanagawa"]["carpYellow"]
-        colors["darkerForground"] = inputcolors["kanagawa"]["sumiInk4"]
         colors["darkBackground"] = inputcolors["kanagawa"]["sumiInk0"]
+        colors["defaultBackground"] = inputcolors["kanagawa"]["sumiInk1"]
+        colors["lighterBackground"] = inputcolors["kanagawa"]["sumiInk2"]
+        colors["lighterBackgroundC"] = inputcolors["kanagawa"]["sumiInk3"]
+        colors["darkerForground"] = inputcolors["kanagawa"]["sumiInk4"]
         colors["widgetDefault"] = inputcolors["kanagawa"]["waveBlue1"]
         colors["widgetLight"] = inputcolors["kanagawa"]["waveBlue2"]
+        colors["defaultForground"] = inputcolors["kanagawa"]["fujiWhite"]
+        colors["contrasts"] = inputcolors["kanagawa"]["surimiOrange"]
+        colors["inactive"] = inputcolors["kanagawa"]["waveAqua2"]
+        colors["active"] = inputcolors["kanagawa"]["samuraiRed"]
+        colors["screencontrast"] = inputcolors["kanagawa"]["waveAqua1"]
+    case "kanagawa-pywal":
+        colors = inputcolors["kanagawa-pywal"]
