@@ -20,6 +20,7 @@ from modules.initkeys import keys, wl_input_rules
 from modules.initscreens import screens
 from modules.initlayout import layouts, floating_layout
 from modules.initgroups import groups
+from modules.inithooks import *
 from libqtile import bar, widget
 from libqtile.config import Click, Drag, Screen
 from libqtile.lazy import lazy
@@ -33,12 +34,6 @@ from libqtile import qtile
 # --------------------
 home = str(Path.home())  # Fetches the home location
 platform = int(os.popen("cat /sys/class/dmi/id/chassis_type").read())
-
-if qtile.core.name == "wayland":
-    os.environ["XDG_SESSION_DESKTOP"] = "qtile:wlroots"
-    os.environ["XDG_CURRENT_DESKTOP"] = "qtile:wlroots"
-# Finds the type of system that is running
-
 
 # Load colors from initcolors.py
 # Currently only the following colors schemes has been created
@@ -86,4 +81,4 @@ auto_minimize = True
 #
 # We choose LG3D to maximize irony: it is a 3D non-reparenting WM written in
 # java that happens to be on java's whitelist.
-wmname = "LG3D"
+wmname = "qtile"
