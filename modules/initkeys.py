@@ -234,15 +234,59 @@ for i in groups:
 keys.extend(
     [
         Key([mod, "mod1"], "Return", lazy.group["scratchpad"].dropdown_toggle("term")),
+        Key(["mod1"], "v", lazy.group["scratchpad"].dropdown_toggle("volume")),
+        Key(["mod1"], "b", lazy.group["scratchpad"].dropdown_toggle("bitwarden")),
     ]
 )
 
+keys.extend(
+    [
+        Key([mod], "d", lazy.spawn("rofi -show drun"), desc="Application launcher"),
+        Key([mod], "b", lazy.spawn("firefox"), desc="Launch web browser"),
+        Key(
+            [],
+            "XF86AudioRaiseVolume",
+            lazy.spawn("pactl -- set-sink-volume 0 +5%"),
+            desc="Volume Up",
+        ),
+        Key(
+            [],
+            "XF86AudioLowerVolume",
+            lazy.spawn("pactl -- set-sink-volume 0 -5%"),
+            desc="Volume Down",
+        ),
+        Key(
+            [],
+            "XF86AudioMute",
+            lazy.spawn("pactl set-sink-mute 0 toggle"),
+            desc="Toggle Mute",
+        ),
+        Key([], "XF86AudioPlay", lazy.spawn("playerctl play-pause"), desc="Play/Pause"),
+        Key([], "XF86AudioNext", lazy.spawn("playerctl next"), desc="Next Song"),
+        Key(
+            [], "XF86AudioPrev", lazy.spawn("playerctl previous"), desc="Previous Song"
+        ),
+        Key([], "XF86AudioStop", lazy.spawn("playerctl stop"), desc="Stop music"),
+        Key(
+            [],
+            "XF86MonBrightnessUp",
+            lazy.spawn("brightnessctl set 5%+"),
+            desc="Increase brightness",
+        ),
+        Key(
+            [],
+            "XF86MonBrightnessDown",
+            lazy.spawn("brightnessctl set 5%-"),
+            desc="Decrease brightness",
+        ),
+    ]
+)
 
 wl_input_rules = {
     "type:keyboard": InputConfig(
         # kb_options="caps:swapescape,altwin:swap_alt_win",
         kb_layout=keyboard_Lang,
-        kb_repeat_rate=50,
-        kb_repeat_delay=250,
+        # kb_repeat_rate=25,
+        # kb_repeat_delay=600,
     ),
 }
