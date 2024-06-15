@@ -3,16 +3,17 @@ from libqtile.config import Group, ScratchPad, DropDown
 # Create labels for groups and assign them a default layout.
 groups = []
 
-group_names = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "minus", "equal"]
+# group_names = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "minus", "equal"]
+group_names = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"]
 
-group_labels = ["", "", "", "", "", "", "", "", "", "", "", ""]
+# group_labels = ["", "", "", "", "", "", "", "", "", "", "", ""]
 
 group_layouts = [
     "monadtall",
     "monadtall",
     "monadtall",
     "monadtall",
-    "monadwide",
+    "monadtall",
     "monadtall",
     "monadtall",
     "monadtall",
@@ -30,7 +31,7 @@ for i in range(len(group_names)):
         Group(
             name=group_names[i],
             layout=group_layouts[i].lower(),
-            label=group_labels[i],
+            #            label=group_labels[i],
         )
     )
 
@@ -48,6 +49,9 @@ groups.append(
                 x=0.1,
                 y=0.1,
                 opacity=0.8,
+            ),
+            DropDown(
+                "bitwarden", "bitwarden-desktop", width=0.4, height=0.6, x=0.3, y=0.1
             ),
         ],
     )
