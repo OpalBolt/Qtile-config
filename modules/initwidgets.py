@@ -11,7 +11,9 @@
 
 from sys import path
 from qtile_extras.widget.decorations import RectDecoration
-from libqtile import widget
+from libqtile.lazy import lazy
+from libqtile.widget import TextBox
+from qtile_extras import widget
 
 path.append("..")
 from vars import font
@@ -20,14 +22,15 @@ from modules.initcolors import colors
 
 widget_defaults = dict(
     font=font,
-    fontsize=12,
-    padding=3,
+    fontsize=15,
+    foreground=colors["highlight"],
+    # padding=3,
 )
 
 dark_widgets = {
     "decorations": [
         RectDecoration(
-            colour=colors["highlight"],
+            colour=colors["darkBackground"],
             filled=True,
             radius=10,
             padding_y=4,
@@ -51,32 +54,136 @@ light_widgets = {
 mid_widgets = {
     "decorations": [
         RectDecoration(
-            colour=colors["highlight"], filled=True, radius=10, padding_y=4, group=True
+            foreground=colors["highlight"],
+            # colour=colors["lighterBackground"],
+            colour=colors["darkBackground"],
+            filled=True,
+            radius=10,
+            padding_y=4,
+            group=True,
         )
     ]
 }
 
 
+def w_update_box():
+    return
+
+
 def load_widgets():
     widgets_list = [
-        widget.CurrentLayout(**widget_defaults),
-        widget.GroupBox(),
-        widget.WindowName(),
-        widget.KeyboardLayout(
-            fmt="⌨  Kbd: {}",
+        widget.Sep(linewidth=0, padding=10, **mid_widgets),
+        widget.CurrentLayoutIcon(scale=0.50, **widget_defaults, **mid_widgets),
+        widget.CurrentLayout(**widget_defaults, **mid_widgets),
+        widget.Sep(linewidth=0, padding=10, **mid_widgets),
+        widget.Sep(linewidth=0, padding=10),
+        widget.Sep(linewidth=0, padding=10, **mid_widgets),
+        widget.TextBox(
+            text="󱑤",
+            **mid_widgets,
+            **widget_defaults,
         ),
-        widget.Chord(
-            chords_colors={
-                "launch": ("#ff0000", "#ffffff"),
+        widget.CheckUpdates(
+            distro="Arch_checkupdates",
+            display_format="{updates}",
+            initial_text="0",
+            no_update_string="0",
+            **widget_defaults,
+            **mid_widgets,
+        ),
+        widget.Sep(linewidth=0, padding=10, **mid_widgets),
+        widget.Sep(linewidth=0, padding=10),
+        widget.Sep(linewidth=0, padding=10, **mid_widgets),
+        widget.TextBox(
+            text="",
+            **mid_widgets,
+            **widget_defaults,
+        ),
+        widget.Volume(
+            get_volume_command="/home/wingej0/dotfiles/qtile/scripts/volume.sh",
+            **mid_widgets,
+            **widget_defaults,
+        ),
+        widget.Sep(
+            foreground=colors["highlight"], padding=10, size_percent=60, **mid_widgets
+        ),
+        widget.TextBox(text="", **mid_widgets, **widget_defaults),
+        widget.Battery(
+            format="{percent:2.0%}",
+            **widget_defaults,
+            **mid_widgets,
+        ),
+        widget.Sep(linewidth=0, padding=10, **mid_widgets),
+        widget.Spacer(),
+        widget.Sep(linewidth=0, padding=10, **dark_widgets),
+        widget.GroupBox(
+            active=colors["highlight"],
+            borderwidth=2,
+            disable_drag=True,
+            hide_unused=False,
+            highlight_color=["#00000000", "#00000000"],
+            highlight_method="line",
+            inactive=colors["inactive"],
+            this_current_screen_border=colors["active"],
+            this_screen_border=colors["highlight"],
+            other_current_screen_border=colors["screencontrast"],
+            other_screen_border=colors["screencontrast"],
+            urgent_method="line",
+            use_mouse_wheel=False,
+            **dark_widgets,
+            **widget_defaults,
+        ),
+        widget.Sep(linewidth=0, padding=10, **dark_widgets),
+        widget.Spacer(),
+        widget.Sep(linewidth=0, padding=10, **mid_widgets),
+        widget.TextBox(
+            text="",
+            mouse_callbacks={
+                "Button1": lazy.spawn("blueman-manager"),
             },
-            name_transform=lambda name: name.upper(),
+            **mid_widgets,
+            **widget_defaults,
         ),
-        widget.TextBox("default config", name="default"),
-        widget.TextBox("Press &lt;M-r&gt; to spawn", foreground="#d75f5f"),
-        # NB Systray is incompatible with Wayland, consider using StatusNotifier instead
-        # widget.StatusNotifier(),
-        widget.Clock(format="%Y-%m-%d %a %I:%M %p"),
-        widget.QuickExit(),
+        widget.TextBox(
+            text="",
+            mouse_callbacks={
+                "Button1": lazy.spawn("chromium --app=https://chatgpt.com/"),
+            },
+            **mid_widgets,
+            **widget_defaults,
+        ),
+        widget.WiFiIcon(
+            active_colour=colors["highlight"],
+            interface="wlan0",
+            padding_y=9,
+            mouse_callbacks={
+                "Button3": lazy.spawn("kitty -e nmtui"),
+            },
+            **widget_defaults,
+            **mid_widgets,
+        ),
+        widget.TextBox(
+            text="",
+            mouse_callbacks={
+                "Button1": lazy.spawn("nautilus"),
+            },
+            **widget_defaults,
+            **mid_widgets,
+        ),
+        widget.Sep(linewidth=0, padding=10, **mid_widgets),
+        widget.Sep(
+            linewidth=0,
+            padding=10,
+        ),
+        widget.Sep(linewidth=0, padding=10, **mid_widgets),
+        widget.Clock(
+            format=" %b %d | %H:%M ",
+            mouse_callbacks={
+                "Button1": lazy.spawn("wlogout"),
+            },
+            **widget_defaults,
+            **mid_widgets,
+        ),
+        widget.Sep(linewidth=0, padding=10, **mid_widgets),
     ]
-
     return widgets_list
