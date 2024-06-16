@@ -38,18 +38,18 @@ keys = [
     # ------
     # Move
     # ------
-    Key(
-        [mod, "shift"],
-        "h",
-        lazy.layout.shuffle_left(),
-        desc="Move window to the left",
-    ),
-    Key(
-        [mod, "shift"],
-        "l",
-        lazy.layout.shuffle_right(),
-        desc="Move window to the right",
-    ),
+    # Key(
+    #     [mod, "shift"],
+    #     "h",
+    #     lazy.layout.shuffle_left(),
+    #     desc="Move window to the left",
+    # ),
+    # Key(
+    #     [mod, "shift"],
+    #     "l",
+    #     lazy.layout.shuffle_right(),
+    #     desc="Move window to the right",
+    # ),
     Key([mod, "shift"], "Up", lazy.layout.shuffle_up(), desc="Shuffle window up."),
     Key(
         [mod, "shift"], "Down", lazy.layout.shuffle_down(), desc="Shuffle window down."
@@ -189,7 +189,6 @@ keys = [
     # ------
     # Launch apps
     # ------
-    Key([mod], "r", lazy.spawncmd(), desc="Spawn a command using a prompt widget"),
     Key([mod], "Return", lazy.spawn(terminal), desc="Launch terminal"),
 ]
 
@@ -243,6 +242,19 @@ keys.extend(
     [
         Key([mod], "d", lazy.spawn("rofi -show drun"), desc="Application launcher"),
         Key([mod], "b", lazy.spawn("firefox"), desc="Launch web browser"),
+        Key([mod], "Escape", lazy.spawn("swaylock"), desc="Lock Screen"),
+        Key(
+            ["mod1"],
+            "f",
+            lazy.spawn("bash /home/mads/.config/qtile/scripts/screenshot.sh"),
+            desc="Capture region",
+        ),
+        Key(
+            [mod],
+            "u",
+            lazy.spawn("bash /home/mads/scripts/rofi-power-command.sh"),
+            desc="Power menu",
+        ),
         Key(
             [],
             "XF86AudioRaiseVolume",
