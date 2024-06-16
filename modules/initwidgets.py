@@ -100,7 +100,24 @@ def load_widgets():
             **widget_defaults,
         ),
         widget.Volume(
-            get_volume_command="/home/wingej0/dotfiles/qtile/scripts/volume.sh",
+            get_volume_command="~/.config/qtile/scripts/volume.sh",
+            mouse_callbacks={
+                "Button1": lazy.spawn(
+                    "bash /home/mads/.config/qtile/scripts/volume.sh 1"
+                ),
+                "Button2": lazy.spawn(
+                    "bash /home/mads/.config/qtile/scripts/volume.sh 2"
+                ),
+                "Button3": lazy.spawn(
+                    "bash /home/mads/.config/qtile/scripts/volume.sh 3"
+                ),
+                "Button4": lazy.spawn(
+                    "bash /home/mads/.config/qtile/scripts/volume.sh 4"
+                ),
+                "Button5": lazy.spawn(
+                    "bash /home/mads/.config/qtile/scripts/volume.sh 5"
+                ),
+            },
             **mid_widgets,
             **widget_defaults,
         ),
@@ -154,7 +171,7 @@ def load_widgets():
         ),
         widget.WiFiIcon(
             active_colour=colors["highlight"],
-            interface="wlan0",
+            interface="wlp9s0",
             padding_y=9,
             mouse_callbacks={
                 "Button3": lazy.spawn("kitty -e nmtui"),
