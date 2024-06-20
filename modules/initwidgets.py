@@ -96,6 +96,23 @@ def load_widgets():
         widget.Sep(linewidth=0, padding=10, **mid_widgets),
         widget.TextBox(
             text="",
+            mouse_callbacks={
+                "Button1": lazy.spawn(
+                    "bash /home/mads/.config/qtile/scripts/volume.sh 1"
+                ),
+                "Button2": lazy.spawn(
+                    "bash /home/mads/.config/qtile/scripts/volume.sh 2"
+                ),
+                "Button3": lazy.spawn(
+                    "bash /home/mads/.config/qtile/scripts/volume.sh 3"
+                ),
+                "Button4": lazy.spawn(
+                    "bash /home/mads/.config/qtile/scripts/volume.sh 4"
+                ),
+                "Button5": lazy.spawn(
+                    "bash /home/mads/.config/qtile/scripts/volume.sh 5"
+                ),
+            },
             **mid_widgets,
             **widget_defaults,
         ),
