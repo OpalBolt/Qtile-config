@@ -295,6 +295,7 @@ keys.extend(
 )
 
 wl_input_rules = {
+    "type:mouse": InputConfig(accel_profile="flat"),
     "type:keyboard": InputConfig(
         # kb_options="caps:swapescape,altwin:swap_alt_win",
         kb_layout=keyboard_Lang,
