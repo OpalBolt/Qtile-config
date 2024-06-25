@@ -21,8 +21,7 @@ from modules.initscreens import screens
 from modules.initlayout import layouts, floating_layout
 from modules.initgroups import groups
 from modules.inithooks import *
-from libqtile import bar, widget
-from libqtile.config import Click, Drag, Screen
+from libqtile.config import Click, Drag
 from libqtile.lazy import lazy
 from pathlib import Path
 from libqtile import qtile
