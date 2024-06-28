@@ -13,4 +13,4 @@ def autostart():
         autostartscript = "~/.config/qtile/scripts/wayland-autostart.sh"
 
     home = os.path.expanduser(autostartscript)
-    subprocess.Popen([home])
+    subprocess.call([home])
