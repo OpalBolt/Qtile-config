@@ -40,7 +40,7 @@ groups.append(
     ScratchPad(
         "scratchpad",
         [
-            DropDown("term", "kitty", width=0.8, height=0.8, x=0.1, y=0.1, opacity=1),
+            DropDown("term", "kitty", width=0.997, height=0.6, x=0, y=-0.03, opacity=1),
             DropDown(
                 "volume",
                 "pavucontrol",
@@ -48,7 +48,7 @@ groups.append(
                 height=0.8,
                 x=0.1,
                 y=0.1,
-                opacity=0.8,
+                opacity=1,
             ),
             DropDown(
                 "bitwarden", "bitwarden-desktop", width=0.4, height=0.6, x=0.3, y=0.1
