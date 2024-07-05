@@ -40,7 +40,15 @@ groups.append(
     ScratchPad(
         "scratchpad",
         [
-            DropDown("term", "kitty", width=0.997, height=0.6, x=0, y=-0.03, opacity=1),
+            DropDown(
+                "term",
+                "kitty -e zellij",
+                width=0.997,
+                height=0.6,
+                x=0,
+                y=-0.03,
+                opacity=1,
+            ),
             DropDown(
                 "volume",
                 "pavucontrol",
