@@ -1,4 +1,5 @@
 #!/bin/bash
+# Most of this is stolen from: https://codeberg.org/JustineSmithies/qtile-wayland-dotfiles/src/branch/master/.config/qtile/autostart.sh
 
 dbus-update-activation-environment --systemd \
 	WAYLAND_DISPLAY XDG_CURRENT_DESKTOP="$XDG_CURRENT_DESKTOP"
