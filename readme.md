@@ -15,3 +15,6 @@ Styles to keep:
 - [x] keyconfig
   - [x] exit
   - [x] restart
+- [ ] bar
+  - [ ] VPN status / connection
+  - [ ] Network connection status
