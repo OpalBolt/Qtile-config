@@ -27,7 +27,7 @@ screens = [
             opacity=0.9,
             size=30,  # "Thickness of the bar"
         ),
-        wallpaper="/home/mads/HQ Ghibli Wallpapers/Spirited Away/04.png",
+        wallpaper="/home/mads/git/personal/wallpapers/the-last-supper.png",
         wallpaper_mode="fill",
     ),
     Screen(
