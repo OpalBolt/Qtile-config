@@ -186,16 +186,16 @@ def load_widgets():
             **mid_widgets,
             **widget_defaults,
         ),
-        widget.WiFiIcon(
-            active_colour=colors["highlight"],
-            interface="wlp9s0",
-            padding_y=9,
-            mouse_callbacks={
-                "Button3": lazy.spawn("kitty -e nmtui"),
-            },
-            **widget_defaults,
-            **mid_widgets,
-        ),
+        # widget.WiFiIcon(
+        #     active_colour=colors["highlight"],
+        #     interface="wlan0",
+        #     padding_y=9,
+        #     mouse_callbacks={
+        #         "Button3": lazy.spawn("kitty -e nmtui"),
+        #     },
+        #     **widget_defaults,
+        #     **mid_widgets,
+        # ),
         widget.TextBox(
             text="",
             mouse_callbacks={
