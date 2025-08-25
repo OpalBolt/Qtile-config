@@ -1,3 +1,6 @@
+I have since moved over to River-VM.
+Please see my config here: https://codeberg.org/OpalBolt/nixos-config
+
 Styles to keep:
 
 - MonadTall
